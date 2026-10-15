@@ -7,9 +7,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "layanan")
-/**
- * @author Muhammad Fahriel (2509116050)
- */
 public class Layanan {
     @Id
     @Column(name = "id_layanan")
@@ -57,5 +54,10 @@ public class Layanan {
         if (kategori != null && !kategori.trim().isEmpty()) {
             this.kategori = kategori;
         }
+    }
+
+    @Override
+    public String toString() {
+        return namaLayanan != null ? namaLayanan + " (" + kategori + ")" : "-";
     }
 }

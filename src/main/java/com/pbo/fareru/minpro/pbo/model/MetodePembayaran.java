@@ -7,9 +7,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "metode_pembayaran")
-/**
- * @author Muhammad Fahriel (2509116050)
- */
 public class MetodePembayaran {
     @Id
     @Column(name = "id_metode")
@@ -57,5 +54,10 @@ public class MetodePembayaran {
         if (jenis != null && !jenis.trim().isEmpty()) {
             this.jenis = jenis;
         }
+    }
+
+    @Override
+    public String toString() {
+        return namaMetode != null ? namaMetode + " [" + jenis + "]" : "-";
     }
 }

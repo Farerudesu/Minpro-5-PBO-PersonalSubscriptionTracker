@@ -1,14 +1,15 @@
-# Minpro-4-PBO-PersonalSubscriptionTracker
+# Minpro-5-PBO-PersonalSubscriptionTracker
 
 ```
-+------------------------------------------+
-| Nama : Muhammad Fahriel                  |
-| NIM  : 2509116050                        |
-| Tema : Personal Subscription Tracker     |
-+------------------------------------------+
++-------------------------------------------------------------+
+| Nama  : Muhammad Fahriel                                    |
+| NIM   : 2509116050                                          |
+| Kelas : Sistem Informasi A 2024                             |
+| Tema  : Personal Subscription Tracker (Desktop GUI App)     |
++-------------------------------------------------------------+
 ```
 
-Aplikasi berbasis terminal (CLI) menggunakan bahasa Java untuk mencatat, mengelola, dan memantau pengeluaran biaya langganan digital pribadi. **Mini Project 4** melanjutkan pengembangan dari Mini Project 3 dengan menghubungkan program ke **Database Relasional MySQL** menggunakan **Prepared Statement JDBC** dan arsitektur **Data Access Object (DAO)**, mengisi **Dummy Data Awal langsung dari file `.sql`**, serta mengimplementasikan **Framework ORM (Hibernate 6 & Jakarta Persistence)** sebagai nilai tambah utama dengan tetap mempertahankan prinsip **Encapsulation**, **Inheritance**, **Polymorphism**, **Abstraction**, **Interface**, dan arsitektur **MVC**.
+Aplikasi desktop interaktif berbasis **Java Swing GUI** untuk mencatat, mengelola, memantau, dan menghitung pengeluaran biaya langganan digital pribadi. Proyek **Mini Project 5 (Minpro 5)** ini melanjutkan pengembangan dari **Mini Project 4** dengan menambahkan antarmuka grafis (**Graphical User Interface / GUI**) menggunakan komponen bawaan Java Swing seperti `JFrame`, `JPanel`, `JButton`, `JTextField`, dan `JTable`. Seluruh fungsionalitas CRUD terhubung langsung ke **Database Relasional MySQL** melalui **JDBC Prepared Statement** dan arsitektur **Data Access Object (DAO)**, dengan data awal yang dimuat secara otomatis dari database tanpa harus memasukkan data secara manual. Proyek ini juga tetap mempertahankan konsep **OOP (Encapsulation, Inheritance, Polymorphism, Abstraction, Interface)**, implementasi **Framework ORM (Hibernate 6 & Jakarta Persistence)**, serta arsitektur **Model-View-Controller (MVC)**.
 
 ---
 
@@ -18,176 +19,150 @@ Aplikasi berbasis terminal (CLI) menggunakan bahasa Java untuk mencatat, mengelo
 2. [Penjelasan Struktur Package](#2-penjelasan-struktur-package)
 3. [Penjelasan Alur Program](#3-penjelasan-alur-program)
 4. [Penjelasan Penerapan Encapsulation dan Inheritance](#4-penjelasan-penerapan-encapsulation-dan-inheritance)
-   - [A. Encapsulation & Access Modifier](#a-encapsulation--access-modifier)
-   - [B. Inheritance (Pewarisan)](#b-inheritance-pewarisan)
+   - [A. Encapsulation & Data Hiding](#a-encapsulation--data-hiding)
+   - [B. Inheritance (Pewarisan Kelas)](#b-inheritance-pewarisan-kelas)
 5. [Penjelasan Penerapan Polymorphism dan Abstraction](#5-penjelasan-penerapan-polymorphism-dan-abstraction)
-   - [A. Polymorphism (Overriding & Overloading)](#a-polymorphism-overriding--overloading)
-   - [B. Abstraction (Abstract Class & Abstract Method)](#b-abstraction-abstract-class--abstract-method)
-   - [C. Keyword `final`](#c-keyword-final)
+   - [A. Abstraction (Abstract Class & Abstract Method)](#a-abstraction-abstract-class--abstract-method)
+   - [B. Polymorphism (Overriding & Overloading)](#b-polymorphism-overriding--overloading)
+   - [C. Interface `DapatDidiskon` & Keyword `final`](#c-interface-dapatdidiskon--keyword-final)
 6. [Penjelasan Penerapan JDBC](#6-penjelasan-penerapan-jdbc)
-   - [A. Koneksi Database Relasional](#a-koneksi-database-relasional)
-   - [B. Prepared Statement & Keamanan SQL Injection](#b-prepared-statement--keamanan-sql-injection)
+   - [A. Koneksi Database Relasional MySQL](#a-koneksi-database-relasional-mysql)
+   - [B. Keamanan Query via Prepared Statement](#b-keamanan-query-via-prepared-statement)
    - [C. Arsitektur Data Access Object (DAO)](#c-arsitektur-data-access-object-dao)
-   - [D. Dummy Data Awal via Database (.sql)](#d-dummy-data-awal-via-database-sql)
-7. [Penjelasan Letak Penerapan Nilai Tambah](#7-penjelasan-letak-penerapan-nilai-tambah)
-   - [A. Framework ORM (Hibernate 6 & Jakarta Persistence)](#a-framework-orm-hibernate-6--jakarta-persistence---nilai-tambah-utama)
-   - [B. Interface `DapatDidiskon`](#b-interface-dapatdidiskon--modeldapatdidiskonjava)
-   - [C. Auto-ID Cerdas Multi-Tabel](#c-auto-id-cerdas-multi-tabel--controllerlangganancontrollerjava)
+   - [D. Inisialisasi Data Otomatis via Database (.sql)](#d-inisialisasi-data-otomatis-via-database-sql)
+7. [Penjelasan Implementasi GUI Menggunakan Java Swing](#7-penjelasan-implementasi-gui-menggunakan-java-swing)
+   - [A. Komponen-Komponen Utama Swing](#a-komponen-komponen-utama-swing)
+   - [B. Tata Letak Antarmuka (Layout Management)](#b-tata-letak-antarmuka-layout-management)
+   - [C. Penanganan Aksi Pengguna (Event Handling)](#c-penanganan-aksi-pengguna-event-handling)
+8. [Penjelasan Hubungan Antara GUI, Controller, DAO, dan Database](#8-penjelasan-hubungan-antara-gui-controller-dao-dan-database)
+9. [Penjelasan Letak Penerapan Nilai Tambah](#9-penjelasan-letak-penerapan-nilai-tambah)
+   - [A. Desain GUI yang Rapi, Sederhana, dan Konsisten](#a-desain-gui-yang-rapi-sederhana-dan-konsisten)
+   - [B. Penggunaan JTable Terstruktur & Pemformatan Data](#b-penggunaan-jtable-terstruktur--pemformatan-data)
+   - [C. Fitur Pencarian dan Penyaringan Data (Search & Filter)](#c-fitur-pencarian-dan-penyaringan-data-search--filter)
+   - [D. Integrasi Framework ORM (Hibernate 6)](#d-integrasi-framework-orm-hibernate-6)
+   - [E. Dialog Simulasi Estimasi Biaya & Diskon Polimorfik](#e-dialog-simulasi-estimasi-biaya--diskon-polimorfik)
+10. [Panduan Menjalankan Program](#10-panduan-menjalankan-program)
 
 ---
 
 ## 1. Deskripsi Singkat Program
 
-**Personal Subscription Tracker** adalah aplikasi yang membantu pengguna mencatat dan mengawasi pengeluaran langganan digital berbayar (seperti Netflix, Spotify, Disney+, Claude Code, GitHub Copilot, Amazon AWS, VPS Hosting, Docker, dll).
+**Personal Subscription Tracker** adalah aplikasi yang dirancang untuk membantu pengguna melacak berbagai layanan digital berbayar yang digunakan, seperti layanan hiburan (*Netflix, Spotify, Disney+*) maupun layanan produktivitas dan pengembangan (*Claude Code, GitHub Copilot, AWS, VPS Hosting, Docker*).
 
-Fitur utama aplikasi:
-
-- **Kategorisasi Langganan Dinamis**: Membedakan langganan hiburan (`Streaming`) dan langganan produktivitas/developer/cloud (`Produktivitas & Cloud SaaS`).
-- **Persistensi Database Penuh (CRUD Interaktif)**:
-  - **Create**: Menambah langganan baru secara terpandu (`[Langkah 1/5]` hingga `[Langkah 5/5]`) dengan ID otomatis sistem, pemilihan layanan dan metode pembayaran, serta kartu pratinjau (*review*) sebelum data disimpan ke MySQL.
-  - **Read**: Menampilkan seluruh data langsung dari database dalam bentuk tabel rapi berbingkai (*border box*) atau kartu detail. Dilengkapi fitur **Pencarian (Search)** berdasarkan kata kunci serta **Filter Data** berdasarkan kategori atau status.
-  - **Update**: Mengedit data langganan dengan memilih langsung dari daftar nomor urut atau ID, dilengkapi editor *multi-field* interaktif sehingga pengguna dapat mengubah beberapa atribut sekaligus dalam satu sesi.
-  - **Delete**: Menghapus langganan dari sistem dan MySQL dengan konfirmasi aman dan kartu detail peringatan.
-- **Data Awal dari Database (.sql)**: Sesuai ketentuan, data awal tidak dibuat lewat kode Java melainkan disediakan langsung melalui skrip database `database/personal_subcrition_tracker.sql` (8 data dummy awal) sehingga saat fitur Read dijalankan pertama kali, data langsung tampil dari database.
-- **Ringkasan Finansial**: Menghitung total pengeluaran per bulan dengan rincian proporsional kategori streaming vs produktif.
-- **Simulasi & Proyeksi Tahunan**: Menghitung proyeksi pengeluaran akumulatif dan tahunan menggunakan perhitungan polimorfik subclass serta interface diskon.
+Fitur-fitur utama pada aplikasi ini meliputi:
+- **Pengelolaan Data Lengkap (CRUD via GUI)**:
+  - **Create**: Menambah data langganan baru melalui form dialog modal dengan ID otomatis, pemilihan master layanan dan metode pembayaran, serta field dinamis sesuai jenis langganan.
+  - **Read**: Menampilkan seluruh catatan langganan dari tabel database ke dalam `JTable` secara terstruktur dan rapi.
+  - **Update**: Mengubah rincian data langganan yang dipilih pada tabel tanpa mengubah ID uniknya.
+  - **Delete**: Menghapus data langganan dari database dengan konfirmasi dialog peringatan terlebih dahulu.
+- **Pemuatan Data Otomatis**: Data langsung diambil dari database MySQL saat aplikasi pertama kali dibuka tanpa perlu input dari awal.
+- **Pencarian & Penyaringan Real-Time**: Memudahkan pencarian data langganan berdasarkan kata kunci nama layanan/ID, filter kategori (Streaming / Produktivitas), dan filter status (Aktif / Nonaktif).
+- **Ringkasan Finansial**: Menampilkan ringkasan total tagihan bulanan, jumlah langganan aktif, serta perbandingan biaya streaming dan produktivitas pada panel dashboard.
+- **Simulasi Biaya & Diskon**: Menyediakan dialog khusus untuk mensimulasikan estimasi biaya jangka panjang berbasis perhitungan polimorfik subclass dan interface diskon.
+- **Dukungan Dua Antarmuka**: Mode utama aplikasi berjalan menggunakan antarmuka grafis (**GUI**), dan tetap menyediakan opsi mode konsol (**CLI**) melalui parameter argumen `--cli`.
 
 ---
 
 ## 2. Penjelasan Struktur Package
 
-Proyek menerapkan arsitektur modular yang rapi dengan memisahkan antarmuka, logika bisnis, akses database, konfigurasi ORM, dan model entitas:
+Proyek ini menggunakan struktur package yang memisahkan tanggung jawab antara antarmuka, logika pengendali, pemrosesan data, dan konfigurasi database:
 
 ```
-com.pbo.fareru.minpro.pbo
-├── config/                         <- Konfigurasi koneksi & ORM
-│   ├── Koneksi.java                <- Utility koneksi JDBC ke MySQL
-│   ├── TesKoneksi.java             <- Verifikasi koneksi JDBC
-│   ├── HibernateUtil.java          <- SessionFactory Manager (Nilai Tambah ORM)
-│   └── TesORM.java                 <- Pengujian query entitas via Hibernate ORM
-├── dao/                            <- Data Access Object (DAO Layer)
-│   ├── LanggananDAO.java           <- Interface kontrak operasi CRUD
-│   ├── LanggananDAOImpl.java       <- Implementasi DAO dengan Prepared Statement JDBC
-│   └── LanggananMapper.java        <- Mapper ResultSet JDBC ke objek Model
-├── model/                          <- Model data, entitas JPA, & logika bisnis
-│   ├── Langganan.java              <- Abstract class (Superclass, Entity JPA)
-│   ├── LanggananStreaming.java     <- Subclass Streaming (implements DapatDidiskon)
-│   ├── LanggananProduktivitas.java <- Subclass Produktivitas (implements DapatDidiskon)
-│   ├── DapatDidiskon.java          <- Interface kontrak diskon
-│   ├── Layanan.java                <- Entitas Layanan (Entity JPA)
-│   └── MetodePembayaran.java       <- Entitas Metode Pembayaran (Entity JPA)
-├── view/                           <- View: tampilan CLI antarmuka terminal
-│   └── LanggananView.java          <- Menu, tabel border box, kartu, format Rupiah
-├── controller/                     <- Controller & validasi input
-│   ├── LanggananController.java    <- Pengendali alur program, CRUD, & logika bisnis
-│   └── InputValidator.java         <- Validasi input anti-crash & nilai default
-└── personalsubscriptiontracker/
-    └── Main.java                   <- Entry point utama program
+src/main/java/com/pbo/fareru/minpro/pbo/
+├── config/                                  <- Konfigurasi koneksi & persistensi
+│   ├── HibernateUtil.java                  <- Konfigurasi SessionFactory ORM Hibernate 6
+│   ├── Koneksi.java                        <- Pengelola koneksi JDBC DriverManager MySQL
+│   ├── TesKoneksi.java                     <- Utilitas pengujian koneksi JDBC
+│   └── TesORM.java                         <- Utilitas pengujian pemetaan ORM Hibernate
+├── controller/                              <- Pengendali logika dan jembatan data (Controller)
+│   ├── InputValidator.java                 <- Validasi input pada mode CLI
+│   ├── LanggananController.java            <- Controller alur menu pada mode CLI
+│   └── LanggananGUIController.java         <- Controller penghubung GUI Swing ke DAO & Database
+├── dao/                                     <- Lapisan akses data (Data Access Object)
+│   ├── LanggananDAO.java                   <- Interface kontrak operasi CRUD
+│   ├── LanggananDAOImpl.java               <- Implementasi SQL Prepared Statement JDBC
+│   └── LanggananMapper.java                <- Pemetaan ResultSet SQL ke objek model
+├── model/                                   <- Entitas data & domain bisnis (Model)
+│   ├── DapatDidiskon.java                  <- Interface kontrak perhitungan diskon
+│   ├── Langganan.java                      <- Abstract class induk model langganan
+│   ├── LanggananProduktivitas.java         <- Subclass langganan produktivitas & cloud
+│   ├── LanggananStreaming.java             <- Subclass langganan streaming media
+│   ├── Layanan.java                        <- Entitas master data layanan digital
+│   └── MetodePembayaran.java               <- Entitas master data metode pembayaran
+├── personalsubscriptiontracker/             <- Titik masuk aplikasi (Main Entry Point)
+│   └── Main.java                           <- Peluncur aplikasi utama (Swing GUI / CLI)
+└── view/                                    <- Antarmuka pengguna (View)
+    ├── LanggananView.java                  <- Antarmuka berbasis teks/terminal (CLI)
+    └── gui/                                <- Antarmuka grafis desktop Java Swing (GUI)
+        ├── DetailLanggananDialog.java      <- Dialog rincian detail data langganan
+        ├── FormLanggananDialog.java        <- Dialog form tambah dan ubah data (Create/Update)
+        ├── MainFrame.java                  <- Window utama aplikasi (JFrame, JTable, Action)
+        ├── SimulasiDiskonDialog.java       <- Dialog simulasi estimasi biaya & diskon
+        └── TambahLayananDialog.java        <- Dialog modal penambahan master layanan baru
 ```
 
-File konfigurasi & database eksternal:
-- `database/personal_subcrition_tracker.sql`: Skrip DDL tabel MySQL (`layanan`, `metode_pembayaran`, `langganan`) beserta 8 data dummy awal.
-- `src/main/resources/hibernate.cfg.xml`: Konfigurasi Hibernate ORM dan pemetaan entitas JPA.
-
-Pembagian tanggung jawab layer:
-- **Model**: Menyimpan atribut data, entitas relasional, enkapsulasi setter/getter, dan aturan perhitungan bisnis.
-- **View**: Menangani representasi visual terminal (tabel ASCII, kartu detail, garis pembatas, format mata uang Rupiah, dan notifikasi status).
-- **Controller**: Mengatur alur program, menerima input melalui `InputValidator`, menginstansiasi objek model, dan memanggil DAO.
-- **DAO Layer**: Memisahkan logika manipulasi basis data dari logika bisnis aplikasi menggunakan SQL Prepared Statement murni.
-- **Config & ORM**: Mengelola koneksi database JDBC dan konfigurasi session Hibernate ORM.
+Berkas pendukung database:
+- `database/personal_subcrition_tracker.sql`: Skrip SQL pembuatan tabel dan data dummy awal.
+- `src/main/resources/hibernate.cfg.xml`: Berkas konfigurasi Hibernate ORM dan mapping entitas.
 
 ---
 
 ## 3. Penjelasan Alur Program
 
-```
-[Start Program] -> [Koneksi ke MySQL] -> [Muat Data Layanan, Metode, & Langganan dari DB]
-       |
-       v
-+---------------------------------------+
-|           TAMPIL MENU UTAMA           | <-------------+
-+---------------------------------------+               |
-| 1. Tampilkan & Cari Langganan (Read)  |               |
-| 2. Tambah Langganan Baru      (Create)|               |
-| 3. Edit Data Langganan        (Update)|               |
-| 4. Batalkan / Hapus Langganan (Delete)|               |
-| 5. Ringkasan Pengeluaran              |               |
-| 6. Simulasi Estimasi Biaya            |               |
-| 7. Keluar                             |               |
-+---------------------------------------+               |
-       |                                                |
-       +---> Pilih 1-6 -> Eksekusi DAO / Bisnis --------+
-       |
-       +---> Pilih 7   -> Tutup Resource & Thread -----> [Program Berhenti]
+Berikut bagan alur proses berjalannya aplikasi dari mulai dijalankan hingga operasi database:
+
+```mermaid
+flowchart TD
+    Start([Aplikasi Dimulai / Main.java]) --> SetLAF[Inisialisasi Look and Feel Sistem]
+    SetLAF --> CekArg{Cek Argumen CLI?}
+    CekArg -- Ada flag --cli --> ModeCLI[Jalankan LanggananController / CLI]
+    CekArg -- Default --> ModeGUI[SwingUtilities.invokeLater / Buka MainFrame]
+    ModeGUI --> PanggilMuatData[LanggananGUIController.muatData]
+    PanggilMuatData --> KoneksiJDBC[Koneksi JDBC ke Database MySQL]
+    KoneksiJDBC --> QueryMaster[SELECT Master Layanan & Metode Pembayaran]
+    KoneksiJDBC --> QueryLangganan[LanggananDAOImpl.findAll via Prepared Statement]
+    QueryLangganan --> IsiTabel[Tampilkan Data ke JTable & Update Panel Ringkasan]
+    IsiTabel --> InteraksiUser{Aksi Pengguna pada GUI}
+    
+    InteraksiUser -- Ketik di Kolom Cari / Filter --> FilterData[Penyaringan Real-Time pada JTable]
+    InteraksiUser -- Klik Tambah --> BukaFormTambah[Buka FormLanggananDialog Mode Tambah]
+    InteraksiUser -- Klik Edit --> BukaFormEdit[Buka FormLanggananDialog Mode Edit]
+    InteraksiUser -- Klik Hapus --> DialogKonfirmasi[Tampilkan Dialog Konfirmasi Hapus]
+    InteraksiUser -- Klik Detail --> BukaDetail[Buka DetailLanggananDialog]
+    InteraksiUser -- Klik Simulasi Biaya --> BukaSimulasi[Buka SimulasiDiskonDialog]
+    InteraksiUser -- Klik Tes ORM --> JalankanORM[Eksekusi Query HQL via HibernateUtil]
+
+    BukaFormTambah --> ValidasiForm[Validasi Input Pengguna]
+    BukaFormEdit --> ValidasiForm
+    ValidasiForm --> EksekusiDAO[Simpan/Ubah Data via LanggananDAOImpl]
+    DialogKonfirmasi -- Konfirmasi Ya --> HapusDAO[Hapus Data via LanggananDAOImpl]
+    
+    EksekusiDAO --> RefreshTampilan[Muat Ulang JTable & Ringkasan Dashboard]
+    HapusDAO --> RefreshTampilan
 ```
 
-1. **Inisialisasi & Pemuatan Data (`Main.java`)**:
-   - `LanggananController` diinstansiasi.
-   - Method `muatDataDatabase()` langsung membaca tabel `layanan`, `metode_pembayaran`, dan memanggil `langgananDAO.findAll()` melalui JDBC.
-   - Seluruh data dummy awal dari file `.sql` langsung terisi ke dalam memori aplikasi tanpa perlu input awal dari kode Java.
-2. **Menampilkan Menu Utama**:
-   Program menyajikan antarmuka interaktif 7 menu utama.
-3. **Eksekusi Fitur CRUD & Analisis**:
-   - **Menu 1 (Read - Tampilkan, Cari, & Filter)**:
-     Menyediakan sub-menu interaktif:
-     1. Tampilkan seluruh data dalam format tabel ringkas rapi (*border box*) dengan penomoran urut.
-     2. Tampilkan seluruh data dalam format kartu detail lengkap.
-     3. **Cari Langganan**: Mencari data berdasarkan nama layanan, ID, kategori, atau metode pembayaran.
-     4. **Filter Langganan**: Menyaring data berdasarkan kategori (*Streaming* vs *Produktivitas*) atau status (*Aktif* vs *Nonaktif*).
-   - **Menu 2 (Create - Tambah Langganan Terpandu)**:
-     - ID langganan baru dibuat otomatis oleh sistem (`SUB09`, `SUB10`, dst).
-     - Pengguna dipandu melalui 5 langkah berurutan: memilih tipe, memilih layanan (bisa memilih layanan yang ada atau mendaftarkan layanan baru dengan ID otomatis `LYNxx`), memilih metode pembayaran (bisa memilih metode yang ada atau mendaftarkan metode baru dengan ID otomatis `PAYxx`), mengisi nominal tarif & tanggal tagihan, serta mengisi atribut spesifik kategori.
-     - Menampilkan **Kartu Pratinjau (*Review*)** data sebelum disimpan ke database, lalu mengeksekusi `langgananDAO.save(...)`.
-   - **Menu 3 (Update - Edit Data Interaktif)**:
-     - Program menampilkan tabel seluruh langganan terlebih dahulu sehingga pengguna tidak perlu menghafal ID.
-     - Pengguna cukup memilih nomor urut (`1..N`) atau mengetik ID (`SUBxx`), atau mengetik `0` untuk batal.
-     - Menyediakan editor *multi-field* interaktif: pengguna dapat mengubah harga, tanggal tagihan, status aktif/nonaktif, metode pembayaran, hingga atribut spesifik kategori dalam satu sesi pengeditan tanpa keluar ke menu utama. Setiap pembaruan langsung disimpan ke database via `langgananDAO.update(...)`.
-   - **Menu 4 (Delete - Hapus / Batalkan Langganan)**:
-     - Menampilkan tabel seluruh langganan dengan nomor urut.
-     - Pengguna memilih data yang ingin dihapus via nomor urut atau ID.
-     - Menampilkan kartu detail data yang akan dihapus beserta peringatan konfirmasi `(y/n)`. Jika disetujui, program menjalankan `langgananDAO.delete(...)` dan menghapus data dari MySQL secara permanen.
-   - **Menu 5 (Ringkasan Pengeluaran)**:
-     Menghitung akumulasi biaya bulanan seluruh langganan aktif dan memisahkan total pengeluaran kategori hiburan streaming vs utilitas produktif, disertai evaluasi batas wajar pengeluaran.
-   - **Menu 6 (Simulasi Biaya & Polimorfisme)**:
-     Menghitung proyeksi biaya $N$ bulan (dengan opsi diskon voucher tambahan via *method overloading*) dan dilanjutkan **Proyeksi Tahunan** yang memanggil *abstract method* `hitungBiayaTahunan()` serta *interface* `hitungDiskon()` untuk masing-masing langganan aktif.
-   - **Menu 7 (Keluar)**:
-     Menghentikan loop menu utama, membersihkan thread koneksi database MySQL via `AbandonedConnectionCleanupThread.checkedShutdown()`, dan menutup aplikasi secara rapi.
+### Tahapan Alur Program:
+1. **Titik Masuk (`Main.java`)**: Aplikasi mengatur tema antarmuka sesuai sistem operasi (`UIManager.getSystemLookAndFeelClassName()`), lalu membuka `MainFrame` melalui antrean *Event Dispatch Thread* (`SwingUtilities.invokeLater`).
+2. **Pemuatan Awal Data**: Saat `MainFrame` terbuka, controller secara otomatis memanggil `muatData()`. Data dibaca langsung dari database MySQL menggunakan JDBC dan DAO, lalu ditampilkan ke komponen `JTable` dan panel ringkasan biaya.
+3. **Operasi Pengguna**:
+   - Pencarian atau pengubahan filter kategori/status langsung memperbarui baris pada `JTable` secara seketika (*real-time*).
+   - Tombol **Tambah** membuka formulir modal untuk memasukkan data baru dengan nomor ID otomatis (`SUBxx`).
+   - Tombol **Edit** membuka data yang sedang dipilih pada baris tabel ke dalam formulir penyuntingan.
+   - Tombol **Hapus** memicu dialog konfirmasi untuk mencegah data terhapus secara tidak sengaja.
+   - Tombol **Detail** menampilkan informasi lengkap langganan beserta atribut spesifik subclass.
+   - Tombol **Simulasi Biaya** menghitung proyeksi biaya bertahap menggunakan method polimorfik.
+   - Tombol **Tes ORM** menguji fungsionalitas Hibernate ORM langsung dari antarmuka desktop.
 
 ---
 
 ## 4. Penjelasan Penerapan Encapsulation dan Inheritance
 
-### A. Encapsulation & Access Modifier
-
-Enkapsulasi menyatukan data dengan method yang mengelolanya serta menyembunyikan detail representasi internal dari akses langsung di luar kelas:
-
-- **Access Modifier `private`**:
-  Semua atribut pada kelas model (`idSubscription`, `layanan`, `hargaBulanan`, `metode`, `tanggalTagihan`, `status`, `kualitasResolusi`, `batasLayar`, `kapasitasStorage`, `lisensiUser`) berstatus `private`. Atribut tidak dapat diakses atau diubah secara langsung dari luar kelas.
-- **Access Modifier `public`**:
-  Getter, setter, konstruktor, dan method operasional berstatus `public` sebagai pintu akses terkontrol.
-- **Access Modifier `protected`**:
-  Konstanta `BATAS_BULAN_DISKON` berstatus `protected` di kelas induk agar dapat diakses langsung oleh subclass tanpa perantara getter.
-- **Validasi Nilai pada Setter**:
-  Setter menyaring data agar objek selalu berada dalam kondisi valid:
-  - `setHargaBulanan(double harga)`: Memastikan harga tidak bernilai negatif; jika negatif maka otomatis diubah menjadi `0`.
-  - `setTanggalTagihan(int tgl)`: Memastikan tanggal berada pada rentang valid `1` sampai `31`.
-  - `setBatasLayar(int batas)` dan `setLisensiUser(int lisensi)`: Memastikan kuota minimal bernilai `1`.
-  - `setIdSubscription(String id)` dan `setStatus(String status)`: Mencegah nilai `null` dan string kosong.
-- **Keyword `final`**:
-  Konstanta `protected static final int BATAS_BULAN_DISKON = 12` bernilai tetap dan tidak dapat dimodifikasi setelah diinisialisasi.
-
-```java
-// Penerapan Enkapsulasi di model/Langganan.java
-public abstract class Langganan {
-    protected static final int BATAS_BULAN_DISKON = 12;
-
-    private String idSubscription;
-    private Layanan layanan;
-    private double hargaBulanan;
-    private MetodePembayaran metode;
-    private int tanggalTagihan;
-    private String status;
-
+### A. Encapsulation & Data Hiding
+Prinsip enkapsulasi diterapkan pada seluruh kelas model:
+- **Hak Akses Privat (`private`)**: Atribut instans dideklarasikan secara `private` agar tidak bisa diubah langsung secara bebas dari luar kelas.
+- **Getter dan Setter dengan Validasi**: Pengaksesan dan pengubahan nilai atribut dilakukan lewat method publik yang menyertakan validasi logika bisnis.
+  - Pada [`Langganan.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/Langganan.java), setter harga memastikan nilai tidak bernilai negatif:
+    ```java
     public void setHargaBulanan(double hargaBulanan) {
         if (hargaBulanan >= 0) {
             this.hargaBulanan = hargaBulanan;
@@ -195,228 +170,250 @@ public abstract class Langganan {
             this.hargaBulanan = 0;
         }
     }
-}
-```
+    ```
+  - Setter tanggal tagihan memastikan nilai berada pada rentang hari yang sah (1 sampai 31):
+    ```java
+    public void setTanggalTagihan(int tanggalTagihan) {
+        if (tanggalTagihan >= 1 && tanggalTagihan <= 31) {
+            this.tanggalTagihan = tanggalTagihan;
+        } else {
+            this.tanggalTagihan = 1;
+        }
+    }
+    ```
 
-### B. Inheritance (Pewarisan)
-
-Mewujudkan hierarki hubungan *is-a* antara kelas induk dan kelas anak:
-
-```
-                      +-----------------------+
-                      |       Langganan       |  <- Superclass (abstract)
-                      +-----------------------+
-                                  ▲
-                                  │ extends
-                  ┌───────────────┴───────────────┐
-                  │                               │
-     +-------------------------+     +--------------------------+
-     |   LanggananStreaming    |     |  LanggananProduktivitas  | <- Subclass
-     +-------------------------+     +--------------------------+
-     | - kualitasResolusi      |     | - kapasitasStorage       |
-     | - batasLayar            |     | - lisensiUser            |
-     +-------------------------+     +--------------------------+
-```
-
-- **Superclass**: Kelas `Langganan` berfungsi sebagai *superclass* yang mewariskan atribut umum (`idSubscription`, `layanan`, `hargaBulanan`, `metode`, `tanggalTagihan`, `status`) serta method operasional (`hitungEstimasiBiaya`, `tampilkanDetail`).
-- **Subclass**:
-  - `LanggananStreaming`: Mewarisi `Langganan` dengan keyword `extends` dan menambahkan atribut spesifik streaming: `kualitasResolusi` (resolusi video/audio) dan `batasLayar` (kuota simultan perangkat).
-  - `LanggananProduktivitas`: Mewarisi `Langganan` dan menambahkan atribut spesifik SaaS: `kapasitasStorage` (kuota penyimpanan/tier spek) dan `lisensiUser` (jumlah akun pengguna berlisensi).
-- **Konstruktor `super(...)`**:
-  Kedua subclass memanggil konstruktor superclass menggunakan `super(idSubscription, layanan, hargaBulanan, metode, tanggalTagihan)` untuk menginisialisasi atribut turunan secara benar.
+### B. Inheritance (Pewarisan Kelas)
+Struktur pewarisan digunakan untuk mengelompokkan karakteristik umum dan membedakan kebutuhan khusus:
+- **Superclass**: Kelas abstrak [`Langganan`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/Langganan.java) menyimpan atribut umum seperti `idSubscription`, `layanan`, `hargaBulanan`, `metode`, `tanggalTagihan`, dan `status`.
+- **Subclass Streaming**: [`LanggananStreaming`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/LanggananStreaming.java) mewarisi `Langganan` dan menambahkan atribut khusus `kualitasResolusi` serta `batasLayar`.
+- **Subclass Produktivitas**: [`LanggananProduktivitas`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/LanggananProduktivitas.java) mewarisi `Langganan` dan menambahkan atribut khusus `kapasitasStorage` serta `lisensiUser`.
+- Pemanggilan `super(...)` pada konstruktor subclass digunakan untuk meneruskan inisialisasi atribut dasar ke kelas induk secara konsisten.
 
 ---
 
 ## 5. Penjelasan Penerapan Polymorphism dan Abstraction
 
-### A. Polymorphism (Overriding & Overloading)
+### A. Abstraction (Abstract Class & Abstract Method)
+- Kelas [`Langganan`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/Langganan.java) berstatus `abstract class` karena merupakan konsep umum yang perlu dispesifikasikan oleh kelas turunannya.
+- Mendeklarasikan *abstract method*:
+  ```java
+  public abstract String getTipeLangganan();
+  public abstract double hitungBiayaTahunan();
+  ```
+- Subclass wajib mengimplementasikan kedua method tersebut sesuai kebutuhan masing-masing domain layanan.
 
-Polimorfisme memungkinkan satu antarmuka atau method memiliki banyak wujud implementasi:
+### B. Polymorphism (Overriding & Overloading)
+1. **Method Overriding (Dynamic Polymorphism)**:
+   - `hitungBiayaTahunan()`:
+     - Pada `LanggananStreaming`, dihitung dengan potongan 5% setahun (`hargaBulanan * 12 * 0.95`).
+     - Pada `LanggananProduktivitas`, dihitung dengan potongan 10% setahun (`hargaBulanan * 12 * 0.90`).
+   - `tampilkanDetail()`:
+     - Ditulis ulang pada masing-masing subclass untuk menambahkan rincian resolusi/layar atau kapasitas storage/lisensi.
+2. **Method Overloading (Static Polymorphism)**:
+   - Kelas `Langganan` memiliki dua varian method:
+     - `hitungEstimasiBiaya(int bulan)`: Menghitung total biaya berdasarkan jumlah bulan.
+     - `hitungEstimasiBiaya(int bulan, double diskonPersen)`: Menghitung total biaya dengan pengurangan diskon promo tambahan.
 
-#### 1. Method Overriding (Dynamic / Runtime Polymorphism)
-Method pada superclass didefinisikan ulang oleh subclass untuk menghasilkan perilaku yang spesifik terhadap tipe objek saat runtime:
-
-- **`hitungBiayaTahunan()`**:
-  - Pada `LanggananStreaming`: Memberikan diskon tahunan sebesar **5%**:
-    $$\text{Biaya} = \text{Harga Bulanan} \times 12 \times 0.95$$
-  - Pada `LanggananProduktivitas`: Memberikan diskon tahunan sebesar **10%**:
-    $$\text{Biaya} = \text{Harga Bulanan} \times 12 \times 0.90$$
-- **`getTipeLangganan()`**:
-  - Mengembalikan `"Streaming (Video/Audio)"` pada `LanggananStreaming`.
-  - Mengembalikan `"Produktivitas & Cloud SaaS"` pada `LanggananProduktivitas`.
-- **`tampilkanDetail()`**:
-  - `LanggananStreaming` memanggil `super.tampilkanDetail()` lalu menambahkan output kualitas resolusi dan batas layar.
-  - `LanggananProduktivitas` memanggil `super.tampilkanDetail()` lalu menambahkan output kapasitas storage dan lisensi user.
-- **`hitungEstimasiBiaya(int bulan)`**:
-  Menghitung akumulasi biaya bulanan dengan otomatis menerapkan diskon khusus jika durasi mencapai $\ge 12$ bulan sesuai karakteristik masing-masing subclass.
-
-Pemanggilan polimorfik dinamis pada Controller:
-```java
-for (Langganan sub : listLangganan) {
-    // Memanggil method yang sama, JVM mengeksekusi implementasi subclass yang sesuai
-    double tahunan = sub.hitungBiayaTahunan();
-}
-```
-
-#### 2. Method Overloading (Static / Compile-time Polymorphism)
-Method yang memiliki nama sama di dalam satu kelas tetapi dibedakan oleh parameter (*signature*):
-
-- **Overloading `tampilkanDetail()`**:
-  - `tampilkanDetail()`: Menampilkan kartu atribut lengkap multi-baris.
-  - `tampilkanDetail(boolean ringkas)`: Menampilkan data dalam format ringkas satu baris saat parameter bernilai `true`.
-- **Overloading `hitungEstimasiBiaya()`**:
-  - `hitungEstimasiBiaya(int bulan)`: Menghitung biaya standar berdasarkan durasi bulan.
-  - `hitungEstimasiBiaya(int bulan, double diskonPersen)`: Menghitung biaya dengan menerapkan potongan persentase voucher diskon tambahan.
-
-### B. Abstraction (Abstract Class & Abstract Method)
-
-Abstraksi memisahkan rancangan konsep umum (*what to do*) dari implementasi detail konkret (*how to do*):
-
-1. **Abstract Class (`Langganan`)**:
-   Dideklarasikan dengan `public abstract class Langganan`. Kelas ini merupakan cetak biru konseptual langganan dan **tidak dapat diinstansiasi secara langsung** (`new Langganan(...)` dicegah oleh compiler). Hanya kelas turunan konkret (`LanggananStreaming` dan `LanggananProduktivitas`) yang dapat diinstansiasi.
-2. **Abstract Method**:
-   Method tanpa body yang mewajibkan seluruh subclass untuk mengimplementasikan logikanya masing-masing:
-   - `public abstract String getTipeLangganan();`
-   - `public abstract double hitungBiayaTahunan();`
-
-### C. Keyword `final`
-
-- `protected static final int BATAS_BULAN_DISKON = 12`:
-  - `static`: Menjadi variabel milik kelas (berbagi satu alokasi memori).
-  - `final`: Nilai konstanta bersifat absolut dan tidak dapat diubah setelah dideklarasikan.
-  - `protected`: Dapat diakses langsung oleh `LanggananStreaming` dan `LanggananProduktivitas` tanpa perlu *getter*.
+### C. Interface `DapatDidiskon` & Keyword `final`
+- Interface [`DapatDidiskon.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/DapatDidiskon.java) menetapkan kontrak method:
+  ```java
+  public interface DapatDidiskon {
+      double hitungDiskon(int bulan);
+  }
+  ```
+  Diimplementasikan oleh kedua subclass untuk menghitung nominal potongan jika periode berlangganan mencapai minimal 12 bulan.
+- Keyword `final`: Diterapkan pada kelas utilitas konfigurasi seperti [`Koneksi.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/config/Koneksi.java) dan pemetaan [`LanggananMapper.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananMapper.java) untuk mencegah pewarisan kelas yang tidak diperlukan.
 
 ---
 
 ## 6. Penjelasan Penerapan JDBC
 
-Persistensi data pada Mini Project 4 diimplementasikan menggunakan koneksi database relasional MySQL, pola **Prepared Statement**, dan arsitektur **Data Access Object (DAO)**:
-
-### A. Koneksi Database Relasional
-Pengelolaan koneksi tersentralisasi pada kelas utilitas [`Koneksi.java`](src/main/java/com/pbo/fareru/minpro/pbo/config/Koneksi.java) menggunakan driver JDBC MySQL (`com.mysql.cj.jdbc.Driver`):
-
+### A. Koneksi Database Relasional MySQL
+Koneksi ke database MySQL dikelola secara terpusat oleh kelas [`Koneksi.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/config/Koneksi.java) menggunakan `DriverManager`:
 ```java
-public final class Koneksi {
-    private static final String URL = "jdbc:mysql://localhost:3306/personal_subcrition_tracker?serverTimezone=Asia/Makassar";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
-
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
-}
+jdbc:mysql://localhost:3306/personal_subcrition_tracker?serverTimezone=Asia/Makassar
 ```
 
-### B. Prepared Statement & Keamanan SQL Injection
-Seluruh operasi manipulasi dan pembacaan database wajib menggunakan `PreparedStatement` dengan parameterisasi query (`?`). Hal ini mencegah kerentanan keamanan SQL Injection serta meningkatkan efisiensi kompilasi query pada mesin MySQL:
-
-- **Read All (`SELECT`)**:
+### B. Keamanan Query via Prepared Statement
+Seluruh manipulasi data (SELECT, INSERT, UPDATE, DELETE) menggunakan objek `PreparedStatement` dengan parameter tanda tanya (`?`), sehingga aman dari risiko SQL Injection:
+- Contoh query INSERT pada [`LanggananDAOImpl.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAOImpl.java):
   ```sql
-  SELECT l.*, ly.nama_layanan, ly.kategori, m.nama_metode, m.jenis 
-  FROM langganan l 
-  JOIN layanan ly ON ly.id_layanan=l.id_layanan 
-  JOIN metode_pembayaran m ON m.id_metode=l.id_metode
-  ```
-- **Read by ID (`SELECT`)**:
-  `... WHERE l.id_subscription = ?`
-- **Create (`INSERT`)**:
-  ```sql
-  INSERT INTO langganan 
-  (id_subscription, id_layanan, harga_bulanan, id_metode, tanggal_tagihan, status, tipe, detail, jumlah) 
+  INSERT INTO langganan (id_subscription, id_layanan, harga_bulanan, id_metode, tanggal_tagihan, status, tipe, detail, jumlah)
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   ```
-- **Update (`UPDATE`)**:
+- Contoh query UPDATE:
   ```sql
-  UPDATE langganan 
-  SET id_metode=?, harga_bulanan=?, tanggal_tagihan=?, status=?, detail=?, jumlah=? 
-  WHERE id_subscription=?
+  UPDATE langganan SET id_metode=?, harga_bulanan=?, tanggal_tagihan=?, status=?, detail=?, jumlah=? WHERE id_subscription=?
   ```
-- **Delete (`DELETE`)**:
+- Contoh query DELETE:
   ```sql
-  DELETE FROM langganan WHERE id_subscription = ?
+  DELETE FROM langganan WHERE id_subscription=?
   ```
-
-Seluruh statement dieksekusi di dalam blok **`try-with-resources`** untuk menjamin `Connection`, `PreparedStatement`, dan `ResultSet` ditutup secara otomatis setelah pemrosesan selesai, sehingga mencegah terjadinya *resource leak*.
 
 ### C. Arsitektur Data Access Object (DAO)
-Pemisahan logika akses data ke layer DAO:
+- **Interface [`LanggananDAO.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAO.java)**: Menyediakan deklarasi kontrak operasi data: `findAll()`, `findById()`, `save()`, `update()`, dan `delete()`.
+- **Implementasi [`LanggananDAOImpl.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAOImpl.java)**: Mengelola eksekusi query JDBC dengan pola *try-with-resources* agar objek `Connection`, `PreparedStatement`, dan `ResultSet` tertutup secara otomatis setelah selesai digunakan.
+- **Penerjemah Objek [`LanggananMapper.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananMapper.java)**: Memetakan baris `ResultSet` SQL menjadi instance objek model yang tepat (`LanggananStreaming` atau `LanggananProduktivitas`).
 
-1. **DAO Interface ([`LanggananDAO.java`](src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAO.java))**:
-   Mendefinisikan kontrak operasi CRUD murni:
-   ```java
-   public interface LanggananDAO {
-       List<Langganan> findAll() throws SQLException;
-       Langganan findById(String id) throws SQLException;
-       void save(Langganan langganan) throws SQLException;
-       void update(Langganan langganan) throws SQLException;
-       void delete(String id) throws SQLException;
-   }
-   ```
-2. **DAO Implementation ([`LanggananDAOImpl.java`](src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAOImpl.java))**:
-   Mengimplementasikan interface DAO secara konkret menggunakan koneksi JDBC dan mengeksekusi *PreparedStatement* ke MySQL.
-3. **Data Mapper ([`LanggananMapper.java`](src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananMapper.java))**:
-   Memetakan baris data pada `ResultSet` relasional ke dalam objek model OOP yang sesuai (`LanggananStreaming` atau `LanggananProduktivitas`) berdasarkan kolom diskriminator `tipe`.
-
-### D. Dummy Data Awal via Database (.sql)
-Sesuai instruksi tugas, data awal **tidak dibuat melalui kode Java**, melainkan diisi langsung melalui file skrip SQL eksternal:
-- **Lokasi file**: [`database/personal_subcrition_tracker.sql`](database/personal_subcrition_tracker.sql)
-- **Isi file**:
-  - DDL pembentukan database `personal_subcrition_tracker`.
-  - Tabel `layanan`, `metode_pembayaran`, dan `langganan` beserta relasi *Foreign Key*.
-  - **8 data dummy langganan awal** (Netflix, Spotify, Disney+, Claude Code, GitHub Copilot, Amazon AWS, VPS Hosting, Docker).
-  - Saat aplikasi dijalankan pertama kali, data langsung terbaca via `langgananDAO.findAll()` dan tampil saat menu Read dibuka tanpa perlu input manual.
+### D. Inisialisasi Data Otomatis via Database (.sql)
+Data awal tidak di-*hardcode* di dalam kode program Java, melainkan langsung disiapkan melalui berkas skrip SQL [`database/personal_subcrition_tracker.sql`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/database/personal_subcrition_tracker.sql). Begitu aplikasi GUI dibuka, data langsung dibaca dari MySQL dan tampil pada antarmuka.
 
 ---
 
-## 7. Penjelasan Letak Penerapan Nilai Tambah
+## 7. Penjelasan Implementasi GUI Menggunakan Java Swing
 
-### A. Framework ORM (Hibernate 6 & Jakarta Persistence) - *Nilai Tambah Utama*
+### A. Komponen-Komponen Utama Swing
+1. **`JFrame` ([`MainFrame.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/MainFrame.java))**: Jendela utama aplikasi dengan ukuran proporsional (1050x680 piksel), penempatan di tengah layar, dan konfigurasi operasi penutupan `EXIT_ON_CLOSE`.
+2. **`JPanel`**: Mengorganisasi area antarmuka menjadi beberapa bagian: panel judul atas, panel ringkasan biaya, panel bilah pencarian/filter, panel kontainer tabel, dan panel tombol aksi bawah.
+3. **`JTable`**: Menampilkan kumpulan data langganan dalam format baris dan kolom yang terstruktur.
+4. **`JScrollPane`**: Memberikan kemampuan gulir vertikal dan horizontal pada komponen tabel dan dialog.
+5. **`JTextField`**: Input teks untuk kata kunci pencarian, pengisian harga bulanan, dan nama layanan.
+6. **`JComboBox`**: Pilihan dropdown untuk data layanan, metode pembayaran, filter kategori, dan status langganan.
+7. **`JSpinner`**: Input angka dengan batasan nilai tertentu untuk tanggal tagihan (1–31), durasi bulan, dan batas kuota pengguna.
+8. **`JButton`**: Tombol pemicu aksi untuk operasi CRUD (*Tambah*, *Edit*, *Hapus*, *Detail*, *Simulasi Biaya*, *Refresh*, dan *Tes ORM*).
+9. **`JDialog`**: Dialog modal khusus untuk form input (`FormLanggananDialog`), rincian data (`DetailLanggananDialog`), simulasi polimorfik (`SimulasiDiskonDialog`), dan penambahan master layanan (`TambahLayananDialog`).
 
-Proyek ini mengintegrasikan **Framework ORM (Object-Relational Mapping)** menggunakan **Hibernate ORM 6.6.1.Final** bersama standar **Jakarta Persistence API (JPA) 3.2.0**:
+### B. Tata Letak Antarmuka (Layout Management)
+- **`BorderLayout`**: Digunakan sebagai layout utama pada `MainFrame` dan dialog untuk memisahkan area atas (NORTH), tengah (CENTER), dan bawah (SOUTH).
+- **`GridBagLayout`**: Diterapkan pada panel form dialog untuk memastikan letak label dan field input tersusun rapi secara dua kolom.
+- **`GridLayout`**: Digunakan pada panel ringkasan biaya agar keempat kartu statistik memiliki ukuran pembagian yang sama rata.
+- **`CardLayout`**: Diterapkan pada panel atribut dinamis formulir agar input field berganti secara otomatis saat pengguna memilih tipe *Streaming* atau *Produktivitas*.
+- **`FlowLayout`**: Mengatur tata letak tombol aksi agar berjejer rapi di sisi kiri dan kanan.
 
-1. **Konfigurasi XML ([`src/main/resources/hibernate.cfg.xml`](src/main/resources/hibernate.cfg.xml))**:
-   Menghubungkan aplikasi ke MySQL melalui dialek `org.hibernate.dialect.MySQLDialect`, mengatur driver JDBC, pooling koneksi, dan mendaftarkan kelas entitas terpetakan.
-2. **Pemetaan Anotasi Entitas JPA pada Model**:
-   Kelas model dipetakan ke tabel relasional menggunakan anotasi resmi JPA:
-   - [`Layanan.java`](src/main/java/com/pbo/fareru/minpro/pbo/model/Layanan.java):
-     `@Entity`, `@Table(name = "layanan")`, `@Id`, `@Column(name = "id_layanan")`, `@Column(name = "nama_layanan")`, `@Column(name = "kategori")`.
-   - [`MetodePembayaran.java`](src/main/java/com/pbo/fareru/minpro/pbo/model/MetodePembayaran.java):
-     `@Entity`, `@Table(name = "metode_pembayaran")`, `@Id`, `@Column(name = "id_metode")`, `@Column(name = "nama_metode")`, `@Column(name = "jenis")`.
-   - [`Langganan.java`](src/main/java/com/pbo/fareru/minpro/pbo/model/Langganan.java):
-     `@Entity`, `@Id` pada atribut `idSubscription`.
-3. **Session Management ([`HibernateUtil.java`](src/main/java/com/pbo/fareru/minpro/pbo/config/HibernateUtil.java))**:
-   Mengelola siklus hidup `SessionFactory` menggunakan `StandardServiceRegistry` dan konfigurasi otomatis.
-4. **Program Pengujian ORM Terverifikasi ([`TesORM.java`](src/main/java/com/pbo/fareru/minpro/pbo/config/TesORM.java))**:
-   Menyediakan file executable mandiri yang membuktikan query entitas murni via **HQL (Hibernate Query Language)**:
-   ```java
-   try (Session session = sf.openSession()) {
-       List<Layanan> list = session.createQuery("from Layanan", Layanan.class).list();
-       for (Layanan l : list) {
-           System.out.println("- [" + l.getIdLayanan() + "] " + l.getNamaLayanan());
-       }
-   }
-   ```
-   Pengujian ini berhasil mengeksekusi pembacaan entitas objek dari database MySQL secara murni menggunakan framework Hibernate ORM.
+### C. Penanganan Aksi Pengguna (Event Handling)
+- **`ActionListener`**: Merespons penekanan tombol (*button click*) dan pilihan dropdown (*combobox change*).
+- **`DocumentListener`**: Mendeteksi perubahan teks pada kolom input pencarian secara seketika (*real-time search*) tanpa perlu menekan tombol tambahan.
+- **`ListSelectionListener`**: Mendeteksi pemilihan baris pada `JTable` untuk mengaktifkan atau menonaktifkan tombol *Edit*, *Hapus*, dan *Detail*.
+- **`MouseAdapter`**: Menangkap aksi klik ganda (*double click*) pada baris `JTable` untuk langsung membuka jendela detail langganan.
 
-### B. Interface `DapatDidiskon` (`model/DapatDidiskon.java`)
+---
 
-Interface mendefinisikan kontrak kemampuan `hitungDiskon(int bulan)` yang dapat diterapkan pada kelas apa pun tanpa terikat langsung pada hierarki warisan `Langganan`:
+## 8. Penjelasan Hubungan Antara GUI, Controller, DAO, dan Database
 
-```java
-public interface DapatDidiskon {
-    double hitungDiskon(int bulan);
-}
+Aplikasi menerapkan pola arsitektur **Model-View-Controller (MVC)** yang terintegrasi dengan lapisan akses data (DAO):
+
+```
++-------------------------------------------------------------------+
+|                        VIEW (Java Swing)                          |
+|   MainFrame, FormLanggananDialog, DetailLanggananDialog, dll.     |
++-------------------------------------------------------------------+
+                               │
+               1. Aksi Pengguna (Klik, Ketik, Form Submit)
+                               ▼
++-------------------------------------------------------------------+
+|                           CONTROLLER                              |
+|                    LanggananGUIController                         |
++-------------------------------------------------------------------+
+                               │
+               2. Pemanggilan Logika Bisnis & CRUD
+                               ▼
++-------------------------------------------------------------------+
+|                           DAO LAYER                               |
+|                 LanggananDAOImpl & HibernateUtil                  |
++-------------------------------------------------------------------+
+                               │
+               3. Eksekusi SQL Prepared Statement / Query HQL
+                               ▼
++-------------------------------------------------------------------+
+|                        DATABASE (MySQL)                           |
+|                  personal_subcrition_tracker                      |
++-------------------------------------------------------------------+
+                               │
+               4. Pengembalian Data ResultSet
+                               ▼
++-------------------------------------------------------------------+
+|                          MODEL (POJO)                             |
+|          Langganan, Layanan, MetodePembayaran, dll.               |
++-------------------------------------------------------------------+
+                               │
+               5. Update Tampilan JTable & Panel Dashboard
+                               ▼
++-------------------------------------------------------------------+
+|                    VIEW (Swing GUI Terupdate)                     |
++-------------------------------------------------------------------+
 ```
 
-- Diimplementasikan oleh `LanggananStreaming` (potongan 5% jika $\ge 12$ bulan).
-- Diimplementasikan oleh `LanggananProduktivitas` (potongan 10% jika $\ge 12$ bulan).
-- Dipanggil secara polimorfik pada Menu 6 menggunakan pemeriksaan tipe `sub instanceof DapatDidiskon`.
+1. **Pengguna berinteraksi dengan View**: Pengguna melakukan tindakan seperti menambah data, memilih baris, atau mencari data pada antarmuka GUI.
+2. **View memanggil Controller**: Kelas antarmuka seperti `MainFrame` dan `FormLanggananDialog` meneruskan input ke [`LanggananGUIController.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/controller/LanggananGUIController.java).
+3. **Controller berkoordinasi dengan DAO**: Controller mengelola validasi, membuat ID baru, dan memanggil method pada [`LanggananDAOImpl.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/dao/LanggananDAOImpl.java).
+4. **DAO menjalankan query ke Database**: DAO mengeksekusi perintah SQL melalui koneksi JDBC ke server MySQL.
+5. **Data dikembalikan ke Model dan View**: Hasil query dibentuk menjadi objek model oleh `LanggananMapper`, disimpan di dalam memori controller, lalu model tabel (`DefaultTableModel`) diperbarui untuk memperlihatkan data terbaru kepada pengguna.
 
-### C. Auto-ID Cerdas Multi-Tabel (`controller/LanggananController.java`)
+---
 
-Untuk meningkatkan interaktivitas dan kenyamanan pengguna:
-- **`generateIdOtomatis()`**: Mengkalkulasikan ID langganan baru (`SUB09`, `SUB10`, dst) dari nomor urut terbesar yang tersimpan di sistem.
-- **`generateIdLayananOtomatis()`**: Mengkalkulasikan ID layanan baru (`LYN09`, `LYN10`, dst) saat mendaftarkan layanan baru.
-- **`generateIdMetodeOtomatis()`**: Mengkalkulasikan ID metode baru (`PAY04`, `PAY05`, dst) saat mendaftarkan metode baru.
+## 9. Penjelasan Letak Penerapan Nilai Tambah
 
-Pengguna tidak perlu lagi mengingat atau mengetik ID primary key secara manual, sehingga mencegah duplikasi data maupun kesalahan penulisan ID.
+Berikut rincian letak dan penerapan fitur **Nilai Tambah** pada aplikasi:
+
+### A. Desain GUI yang Rapi, Sederhana, dan Konsisten
+- **Letak Kode**: [`view/gui/MainFrame.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/MainFrame.java#L45-L105) & seluruh dialog di package [`view/gui/`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/).
+- **Penerapan**:
+  - Menggunakan komponen standar Java Swing murni dengan *Look and Feel* bawaan sistem operasi.
+  - Tata letak terstruktur rapi menggunakan *BorderLayout*, *GridBagLayout*, *GridLayout*, dan border berlabel (*TitledBorder*) sehingga mudah dipahami.
+  - Dilengkapi panel ringkasan informasi pengeluaran bulanan di bagian atas jendela utama.
+
+### B. Penggunaan JTable Terstruktur & Pemformatan Data
+- **Letak Kode**: [`view/gui/MainFrame.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/MainFrame.java#L110-L165).
+- **Penerapan**:
+  - `JTable` dikonfigurasi menggunakan `DefaultTableModel` berstatus *read-only* agar data tidak tersunting secara keliru tanpa melalui validasi form.
+  - Memiliki 10 kolom terstruktur: `No`, `ID`, `Layanan`, `Kategori / Tipe`, `Harga / Bulan`, `Tgl Tagihan`, `Status`, `Metode Pembayaran`, `Detail Spesifik`, dan `Kapasitas / Lisensi`.
+  - Format angka pada kolom harga bulanan diformat rapi ke dalam bentuk mata uang Rupiah (`Rp xx.xxx,00`) rata kanan.
+  - Kolom nomor urut, ID, tanggal, dan status diposisikan rata tengah (*center-aligned*).
+
+### C. Fitur Pencarian dan Penyaringan Data (Search & Filter)
+- **Letak Kode**: [`view/gui/MainFrame.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/MainFrame.java#L70-L100) & [`controller/LanggananGUIController.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/controller/LanggananGUIController.java#L140-L180).
+- **Penerapan**:
+  - **Pencarian Real-Time**: Kolom input `txtPencarian` menggunakan `DocumentListener` sehingga tabel langsung terfilter seketika saat pengguna mengetik kata kunci.
+  - **Filter Kategori**: Dropdown untuk menyaring kategori *Semua*, *Streaming*, atau *Produktivitas*.
+  - **Filter Status**: Dropdown untuk menyaring status *Semua*, *Aktif*, atau *Nonaktif*.
+  - **Tombol Reset**: Mengembalikan seluruh filter ke kondisi semula.
+  - **Label Indikator Jumlah Data**: Menampilkan informasi jumlah data yang sedang tampil (contoh: *"Menampilkan 8 dari 8 data"*).
+
+### D. Integrasi Framework ORM (Hibernate 6)
+- **Letak Kode**: [`config/HibernateUtil.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/config/HibernateUtil.java), [`model/Layanan.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/model/Layanan.java), [`controller/LanggananGUIController.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/controller/LanggananGUIController.java#L215-L225).
+- **Penerapan**:
+  - Konfigurasi Hibernate 6 dan pemetaan JPA (`@Entity`, `@Table`, `@Id`, `@Column`) dari Mini Project 4 tetap dipertahankan.
+  - Disediakan tombol **`Tes ORM`** pada antarmuka utama yang menjalankan query HQL untuk menguji koneksi ORM secara langsung saat aplikasi desktop berjalan.
+
+### E. Dialog Simulasi Estimasi Biaya & Diskon Polimorfik
+- **Letak Kode**: [`view/gui/SimulasiDiskonDialog.java`](file:///c:/Users/Fareru/Documents/NetBeansProjects/Minpro-3-PBO-PersonalSubcriptionTracker/src/main/java/com/pbo/fareru/minpro/pbo/view/gui/SimulasiDiskonDialog.java).
+- **Penerapan**:
+  - Fitur simulasi dari Minpro sebelumnya diintegrasikan ke dalam dialog visual GUI.
+  - Memanfaatkan polimorfisme overriding (`hitungBiayaTahunan`) dan interface `DapatDidiskon` untuk menghitung proyeksi biaya jangka panjang sesuai durasi bulan dan persentase promo tambahan yang dimasukkan pengguna.
+
+---
+
+## 10. Panduan Menjalankan Program
+
+### Prasyarat:
+- **Java Development Kit (JDK)**: Versi 17 atau yang lebih baru.
+- **Apache Maven**: Versi 3.8+ (atau menggunakan Maven yang terpasang pada NetBeans).
+- **MySQL Database Server**: Port `3306` (misal via XAMPP).
+
+### Langkah Menjalankan:
+1. Pastikan service MySQL sedang berjalan.
+2. Impor berkas database:
+   ```bash
+   mysql -u root -p < database/personal_subcrition_tracker.sql
+   ```
+3. Kompilasi program via Maven:
+   ```bash
+   mvn clean compile
+   ```
+4. Jalankan aplikasi mode GUI Desktop (Default):
+   ```bash
+   mvn exec:java
+   ```
+5. *(Opsional)* Menjalankan mode CLI Terminal:
+   ```bash
+   mvn exec:java -Dexec.args="--cli"
+   ```
+
+---
+
+```
++-------------------------------------------------------------+
+| Mini Project 5 PBO - Universitas Mulawarman                 |
+| Dikembangkan oleh Muhammad Fahriel (NIM: 2509116050)        |
++-------------------------------------------------------------+
+```
